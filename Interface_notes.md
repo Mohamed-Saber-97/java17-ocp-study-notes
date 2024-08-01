@@ -1,5 +1,5 @@
 
-# Functional Interface & Lambda !
+# Anonymous class & Lambda Notes !
 
 1. A functional Interface (it is an interface that conatians only one function)
     1. Can be a refernce to anonymous class.
