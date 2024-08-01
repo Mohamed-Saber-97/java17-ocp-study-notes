@@ -20,4 +20,6 @@
      1. You can **Refernce** to it by all types (**interface, abtract class,normal class --no need to override--**), if you already overrided the functions, **But you can't call this funtion by the object**.
      2. If no Reference, Then you can write anonymous class directly and then **it be called ONCE if you Call the function directly after the anonymous class and before the semicolon ;** 
 ![Add new function inside anonymous class](./images/AnonymousClassWithNewFunction.png "Add new function inside anonymous class")
-           
+
+
+5. To be Continued
