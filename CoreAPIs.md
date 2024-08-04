@@ -43,8 +43,12 @@ String replace(CharSequence target, CharSequence replacement);
 * What does normalizing whitespace mean, you ask? First, a line break is added to the end of the string **if not already there**. Second, any line breaks are converted to the \n format.
 * `text\ntext\ntext` the `indent(n)` adds extra `n` lines before each line not only the first one.
 
-![Rules for indent() and stripIndent()](./images/RulesforindentandstripIndent.png "Rules for indent() and 
-stripIndent()")
+|          Method          |                                                 Indent change                                                 | Normalizes existing line breaks | Adds line break at endif missing |
+|:------------------------:|:-------------------------------------------------------------------------------------------------------------:|:-------------------------------:|:--------------------------------:|
+| `indent(n)` where n > 0  |                                    Adds n spaces to beginning of each line                                    |               Yes               |               Yes                |
+| `indent(n)` where n == 0 |                                                   No change                                                   |               Yes               |               Yes                |
+| `indent(n)` where n < 0  | Removes up to n spaces from each line where the same number of characters is removed from each non-blank line |               Yes               |               Yes                |
+|     `stripIndent()`      |                                   Removes all leading incidental whitespace                                   |               Yes               |                No                |
 
 ```java
 //checks whether two String objects contain exactly the same characters in the same order
@@ -67,10 +71,10 @@ String name = "Mohamed".substring(8,2);//exception
     `hashCode()` to be consistent. This means that for any two objects, if a.equals(b) is true, then a.hashCode()==b.
     hashCode() must also be true. **If they are not consistent, this could lead to invalid data and side effects in hash-based collections such as
     HashMap and HashSet.**
-* ```java
+```java
   // IllegalFormatConversionException if wrong types were used
   System.out.println("Hello %s, order %d is ready".formatted(name, orderId));
-  ```
+```
 
 |  Symbol  |                           Description                            |
 |:--------:|:----------------------------------------------------------------:|
@@ -100,14 +104,14 @@ System.out.format("[%.3f]",pi); // [3.142]
 
 ### Most common StringBuilder and StringBuffer methods
 ```java
-    StringBuilder alpha = new StringBuilder();
-    alpha.append("A");// not alpha =  alpha.append("A");
-    StringBuilder append(String str);
-    StringBuilder insert(int offset, String str);
-    StringBuilder delete(int startIndex, int endIndex);//endIndex can be greater than length
-    StringBuilder deleteCharAt(int index);//StringIndexOutOfBoundsException
-    StringBuilder reverse();
-    StringBuilder replace(int startIndex, int endIndex, String newString);// Allows endIndex > length
+StringBuilder alpha = new StringBuilder();
+alpha.append("A");// not alpha =  alpha.append("A");
+StringBuilder append(String str);
+StringBuilder insert(int offset, String str);
+StringBuilder delete(int startIndex, int endIndex);//endIndex can be greater than length
+StringBuilder deleteCharAt(int index);//StringIndexOutOfBoundsException
+StringBuilder reverse();
+StringBuilder replace(int startIndex, int endIndex, String newString);// Allows endIndex > length
 ```
 ### Understanding Equality and String Pool
 
@@ -164,6 +168,7 @@ System.out.println(Arrays.binarySearch(numbers, 4)); // 1
 // 1 should be inserted at index 0. so -0-1 = -1
 System.out.println(Arrays.binarySearch(numbers, 1)); // -1
 Arrays.compare(new int[] {1}, new int[] {2});//1,0 or -1
+Arrays.mismatch(new int[] {1}, new int[] {1});//Index of missing element in either one of the arrays
 ```
 * `compare()`,`compareTo()`
   * null is smaller than any other value.
@@ -172,23 +177,33 @@ Arrays.compare(new int[] {1}, new int[] {2});//1,0 or -1
   * For strings/characters, numbers are smaller than letters.
   * For strings/characters, uppercase is smaller than lowercase
 
-![Arrays.compare() examples](./images/ArraysCompare.png "Arrays.compare() examples")
+|     First array      |     Second array      |     Result      |                            Reason                            |
+|:--------------------:|:---------------------:|:---------------:|:------------------------------------------------------------:|
+|  `new int[] {1, 2}`  |    `new int[] {1}`    | Positive number | The first element is the same, but the first array is longer |
+|  `new int[] {1, 2}`  |  `new int[] {1, 2}`   |      Zero       |                         Exact match                          |
+| `new String[] {"a"}` | `new String[] {"aa"}` | Negative number |       The first element is a substring of the second.        |
+| `new String[] {"a"}` | `new String[] {"A"}`  | Positive number |             Uppercase is smaller than lowercase              |
+| `new String[] {"a"}` | `new String[] {null}` | Positive number |                null is smaller than a letter                 |
 
 * `mismatch()` If the arrays are equal, mismatch() returns -1. Otherwise, it returns the first index where they differ. 
 
-![Arrays.compare() examples](./images/EqualityVsComparisonVsMismatch.png "Arrays.compare() examples")
+|    Method    | When arrays contain the same data |  When arrays are different  |
+|:------------:|:---------------------------------:|:---------------------------:|
+|  `equals()`  |              `true`               |           `false`           |
+| `compare()`  |                `0`                | Positive or negative number |
+| `mismatch()` |                `1`                |   Zero or positive index    |
 
 ## Math APIs
 
 ```java
-static double pow(double number, double exponent);
-static double min(double a, double b);//Or use the one in wrapper classes
-static float min(float a, float b);
-static long round(double num);//returns long if a double is passed
-static int round(float num);
-static double ceil(double num);
-static double floor(double num);
-static double random();//It's better to use Random class
+double min(double a, double b);//Or use the one in wrapper classes
+double pow(double number, double exponent);
+float min(float a, float b);
+long round(double num);//returns long if a double is passed
+int round(float num);
+double ceil(double num);
+double floor(double num);
+double random();//It's better to use Random class
 ```
 
 ## Date and Times
@@ -285,7 +300,7 @@ System.out.println(truncated); // 03:12
 
 |     Method      | Can use with Period? | Can use with Duration? |
 |:---------------:|:--------------------:|:----------------------:|
-|  `LocalDate`    |         Yes          |           No           |
+|   `LocalDate`   |         Yes          |           No           |
 | `LocalDateTime` |         Yes          |          Yes           |
 |   `LocalTime`   |          No          |          Yes           |
 | `ZonedDateTime` |         Yes          |          Yes           | 

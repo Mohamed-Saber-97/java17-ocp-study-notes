@@ -10,7 +10,25 @@
 ```
 * the `x % y` results in a value between `0` and `(y - 1)`
 
-![Order of operator precedence](./images/OrderOfOperatorPrecedence.png "Order of operator precedence")
+|            Operator             |                Symbols and examples                 |   Evaluation    |
+|:-------------------------------:|:---------------------------------------------------:|:---------------:|
+|      Post-unary operators       |            `expression++, expression--`             | `Left-to-right` |
+|       Pre-unary operators       |            `++expression, --expression`             | `Left-to-right` |
+|      Other unary operators      |                `-, !, ~, +, (type)`                 | `Right-to-left` |
+|              Cast               |                  `(Type)reference`                  | `Right-to-left` |
+| Multiplication/division/modulus |                      `*, /, %`                      | `Left-to-right` |
+|      Addition/subtraction       |                       `+, -`                        | `Left-to-right` |
+|         Shift operators         |                    `<<, >>, >>>`                    | `Left-to-right` |
+|      Relational operators       |             `<, >, <=, >=, instanceof`              | `Left-to-right` |
+|      Equal to/not equal to      |                      `==, !=`                       | `Left-to-right` |
+|           Logical AND           |                         `&`                         | `Left-to-right` |
+|      Logical exclusive OR       |                         `^`                         | `Left-to-right` |
+|      Logical inclusive OR       |                        `\|`                         | `Left-to-right` |
+|         Conditional AND         |                        `&&`                         | `Left-to-right` |
+|         Conditional OR          |                       `\|\|`                        | `Left-to-right` |
+|        Ternary operators        |   `boolean expression ? expression1 :expression2`   | `Right-to-left` |
+|      Assignment operators       | `=, +=, -=, *=, /=, %=, &=, ^=, \|=, <<=, >>=,>>>=` | `Right-to-left` |
+|         Arrow operator          |                        `->`                         | `Right-to-left` |
 
 * Numeric Promotion Rules 
   * If two values have different data types, values will be promoted to the larger type
@@ -24,7 +42,10 @@
 * the compiler will **automatically cast** the resulting value to the data type of the value on the left side of the compound operator
 * `x = x++; // RETURNS X NOT X++`
 
-![EqualityOperators](./images/EqualityOperators.png "EqualityOperators")
+|  Operator  |   Example   |                     Apply to primitives                     |                         Apply to objects                          |
+|:----------:|:-----------:|:-----------------------------------------------------------:|:-----------------------------------------------------------------:|
+|  Equality  |  `a == 10`  |  Returns `true` if the two values represent the same value  |    Returns `true` if the two values reference the same object     |
+| Inequality | `b != 3.14` | Returns `true` if the two values represent different values | Returns `true` if the two values do not reference the same object |
 
 * The equality operator can be applied to numeric values, boolean values, and objects (including String and null). When applying the equality operator, you cannot mix these types.
 

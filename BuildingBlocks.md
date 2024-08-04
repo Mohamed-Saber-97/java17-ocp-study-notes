@@ -14,7 +14,13 @@
   * You can’t refer to a variable before it has been defined
   * We can put comments anywhere, blank lines are ignored
 
-![Order for declaring a class](./images/OrderForDeclaringAClass.png "Order for declaring a class")
+|          Element           |        Example        | Required? |                     Where does it go?                      |
+|:--------------------------:|:---------------------:|:---------:|:----------------------------------------------------------:|
+|    Package declaration     |    `package abc;`     |    No     | First line in the file (excluding comments or blank lines) |
+|     import statements      | `import java.util.*;` |    No     |         Immediately after the package (if present)         |
+| Top-level type declaration |   `public class C`    |    Yes    |           Immediately after the import (if any)            |
+|     Field declarations     |     `int value;`      |    No     |            Any top-level element within a class            |
+|    Method declarations     |    `void method()`    |    No     |            Any top-level element within a class            |
 
 ### Fields and Methods
 
@@ -46,12 +52,15 @@
 * Including so many `classes` doesn't slows down your program execution.The compiler figures out what’s actually needed.
 * When the class name is found in multiple packages, Java gives you a compiler error by telling you the imports are ambiguous.
 * Explicitly import a class name, it takes precedence over any
-  wildcards present. 
-* 
+  wildcards present.
+
 ## Compiling and Running Code with Packages
 
-![Setup procedure by operating system](./images/SetupProcedureByOperatingSystem.png "Setup procedure by operating 
-system")
+|        Step         |            Windows             |          Mac/Linux          |
+|:-------------------:|:------------------------------:|:---------------------------:|
+| Create first class  | `C:\temp\packagea\ClassA.java` | `/tmp/packagea/ClassA.java` |
+| Create second class | `C:\temp\packageb\ClassB.java` | `/tmp/packageb/ClassB.java` |
+|   Go to directory   |          `cd C:\temp`          |          `cd /tmp`          |
 
 ```java
 //ClassA.java
@@ -131,7 +140,16 @@ public class Bird {//class definition
   * **beginning / end** of a literal
   * right **before / after** a decimal point
 
-![Primitive types](./images/PrimitiveTypes.png "Primitive types")
+|  Keyword   |            Type             |    Min value     |    Max value     | Default Value |  Example   |
+|:----------:|:---------------------------:|:----------------:|:----------------:|:-------------:|:----------:|
+| `boolean`  |        true or false        |      `n/a`       |      `n/a`       |    `false`    |   `true`   |
+|   `byte`   |    8-bit integral value     |      `-128`      |      `127`       |      `0`      |   `123`    |
+|  `short`   |    16-bit integral value    |    `-32,768`     |     `32,767`     |      `0`      |   `123`    |
+|   `int`    |    32-bit integral value    | `-2,147,483,648` | `2,147,483,647`  |      `0`      |   `123`    |
+|   `long`   |    64-bit integral value    | -2<sup>63</sup>  | 2<sup>63</sup>-1 |     `0L`      |   `123L`   |
+|  `float`   | 32-bit floating-point value |      `n/a`       |      `n/a`       |    `0.0f`     | `123.456f` |
+|  `double`  | 64-bit floating-point value |      `n/a`       |      `n/a`       |     `0.0`     | `123.456`  |
+|   `char`   |    16-bit Unicode value     |       `0`        |     `65,535`     |   `\u0000`    |    `a`     |
 
 ### Reference Types
 * A reference ***points*** to an object by storing the memory address where the object is located. A reference can be assigned to
@@ -149,5 +167,14 @@ public class Bird {//class definition
   int primitive = Integer.parseInt("123");
   Integer wrapper = Integer.valueOf("123");
   ```
-![Wrapper classes](./images/WrapperClasses.png "Wrapper classes")
 
+| Primitive type | Wrapper class | Wrapper class inherits Number? |     Example of creating      |
+|:--------------:|:-------------:|:------------------------------:|:----------------------------:|
+|   `boolean`    |   `Boolean`   |              `No`              |   `Boolean.valueOf(true)`    |
+|     `byte`     |    `Byte`     |             `Yes`              |   `Byte.valueOf((byte) 1)`   |
+|    `short`     |    `Short`    |             `Yes`              |  `Short.valueOf((short) 1)`  |
+|     `int`      |   `Integer`   |             `Yes`              |     `Integer.valueOf(1)`     |
+|     `long`     |    `Long`     |             `Yes`              |      `Long.valueOf(1)`       |
+|    `float`     |    `Float`    |             `Yes`              | `Float.valueOf((float) 1.0)` |
+|    `double`    |   `Double`    |             `Yes`              |    `Double.valueOf(1.0)`     |
+|     `char`     |  `Character`  |              `No`              |   `Character.valueOf('c')`   |
