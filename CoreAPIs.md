@@ -114,9 +114,9 @@ System.out.format("[%.3f]",pi); // [3.142]
   of `Object` if it's`Overridden`
 * Using a literal `String` goes into the string pool. The `myObject.toString()` method returns a string but 
   not a literal, so it does not go into the string pool as function are invoked in the `runtime`.
-* any `method` on string creates a new `object` in the `intern pool` or `string pool`. Only the literal and the 
-  `+` of  **string literal** is considered as compile-time, so it's added to the pool.
-  (compile-time) strings are added to the pool
+* any `method` on string creates a new `object` in the `heap memory` not `intern pool` or `string pool`. Only the 
+  literal and the `+` of  **string literal** is considered as compile-time, so it's added to the pool.
+  (compile-time) strings are only added to the pool
 * String objects can be moved  from the heap to the pool using `intern()` and not vice versa
 
 ## Arrays
