@@ -40,7 +40,8 @@ String toLowerCase();
 String toUpperCase();
 String replace(CharSequence target, CharSequence replacement);
 ```
-* What does normalizing whitespace mean, you ask? First, a line break is added to the end of the string if not already there. Second, any line breaks are converted to the \n format.
+* What does normalizing whitespace mean, you ask? First, a line break is added to the end of the string **if not already there**. Second, any line breaks are converted to the \n format.
+* `text\ntext\ntext` the `indent(n)` adds extra `n` lines before each line not only the first one.
 
 ![Rules for indent() and stripIndent()](./images/RulesforindentandstripIndent.png "Rules for indent() and 
 stripIndent()")
@@ -115,12 +116,19 @@ System.out.format("[%.3f]",pi); // [3.142]
 * Using a literal `String` goes into the string pool. The `myObject.toString()` method returns a string but 
   not a literal, so it does not go into the string pool as function are invoked in the `runtime`.
 * any `method` on string creates a new `object` in the `heap memory` not `intern pool` or `string pool`. Only the 
-  literal and the `+` of  **string literal** is considered as compile-time, so it's added to the pool.
-  (compile-time) strings are only added to the pool
+  literal and the `+` of  **string literal** is considered as compile-time *only if it's done during initialization*,
+  so it's added to the pool. (compile-time) strings are only added to the pool. the `+` operator is the same as `concat()` method which runs at `runtime`
 * String objects can be moved  from the heap to the pool using `intern()` and not vice versa
 
 ## Arrays
 * `int[] moreNumbers = {42, 55, 99};` this is called anonymous array. It is anonymous because you don’t specify the type and size.
+* `Arrays` don't `Override` the `equals()` method so it means equality operator `==`.
+* we must specify the size of the first array in multidimensional arrays.
+  * `Object[][][] cubbies = new Object[3][0][5];// VALID`
+  * `int[][] scores = new int[5][];// VALID`
+  * `java.util.Date[] dates[] = new java.util.Date[2][];// VALID`
+  * `int[][] types = new int[];// ERROR`
+  * `int[][] java = new int[][];// ERROR` 
 
 ```java
 String[] bugs = { "cricket", "beetle", "ladybug" };
@@ -173,6 +181,7 @@ Arrays.compare(new int[] {1}, new int[] {2});//1,0 or -1
 ## Math APIs
 
 ```java
+static double pow(double number, double exponent);
 static double min(double a, double b);//Or use the one in wrapper classes
 static float min(float a, float b);
 static long round(double num);//returns long if a double is passed
@@ -293,5 +302,6 @@ var date = LocalDate.of(2022, 5, 25);
 var time = LocalTime.of(11, 55, 00);
 var zone = ZoneId.of("US/Eastern");
 var zonedDateTime = ZonedDateTime.of(date, time, zone);
+//Without a time zone, Java doesn’t know what moment in time to use for the Instant.
 var instant = zonedDateTime.toInstant(); // 2022–05–25T15:55:00Z
 ```
