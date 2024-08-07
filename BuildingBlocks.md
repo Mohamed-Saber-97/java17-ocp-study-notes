@@ -129,7 +129,7 @@ public class Bird {//class definition
   * `numeric = 0, 0.0`
   * `boolean = false`
   * `char = '\u0000'`
-
+* **`final` variables don't have default values**
 ### Primitive Types
 
 * primitive types hold their values in the memory where the variable is allocated.
