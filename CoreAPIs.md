@@ -41,7 +41,7 @@ String toUpperCase();
 String replace(CharSequence target, CharSequence replacement);
 ```
 * What does normalizing whitespace mean, you ask? First, a line break is added to the end of the string **if not already there**. Second, any line breaks are converted to the \n format.
-* `text\ntext\ntext` the `indent(n)` adds extra `n` lines before each line not only the first one.
+* `text\ntext\ntext` the `indent(n)` adds extra `n` spaces before each line not only the first one.
 
 |          Method          |                                                 Indent change                                                 | Normalizes existing line breaks | Adds line break at endif missing |
 |:------------------------:|:-------------------------------------------------------------------------------------------------------------:|:-------------------------------:|:--------------------------------:|
@@ -159,7 +159,7 @@ objects[0] = new StringBuilder(); // Careful!
 ```java
 String[] mammals = {"monkey", "chimp", "donkey"};
 System.out.println(mammals.length); // 3
-//you can create customer sort using comparator interface
+//you can create custom sort using comparator interface
 Arrays.sort(mammals);// (Numbers sort before letters, and uppercase sorts before lowercase.)
 int[] numbers = {2,4,6,8};
 //When the array is not sorted the output will be undefined
@@ -191,7 +191,7 @@ Arrays.mismatch(new int[] {1}, new int[] {1});//Index of missing element in eith
 |:------------:|:---------------------------------:|:---------------------------:|
 |  `equals()`  |              `true`               |           `false`           |
 | `compare()`  |                `0`                | Positive or negative number |
-| `mismatch()` |                `1`                |   Zero or positive index    |
+| `mismatch()` |               `-1`                |   Zero or positive index    |
 
 ## Math APIs
 

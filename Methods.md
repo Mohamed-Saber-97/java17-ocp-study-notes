@@ -81,7 +81,6 @@ public class Trip {
 ## Declaring Local and Instance Variables
 * marking a local variable final is often a good practice
 * all local variable references are destroyed after the block is executed, but the objects they point to may still be accessible.
-* Only `final` can be applied to local variables.
 * `final int rest; rest = 5;` we don’t need to assign a value when a final variable is declared. It needs to be done before it's used.
 * The final attribute only refers to the variable reference
   * The reference for the `primitive` types are the value stored in memory
@@ -94,11 +93,11 @@ public class Trip {
 * The compiler does not apply a default value to final variables
 * A final instance or final static variable must receive a value when it is declared or as part of initialization.
 
-|  Modifier  |                                              Description                                              |
-|:----------:|:-----------------------------------------------------------------------------------------------------:|
-|  `final`   | Specifies that the instance variable must be initialized with each instance of the class exactly once |   
-| `volatile` |          Instructs the JVM that the value in this variable may be modified by other threads           |   
-| `volatile` |          Used to indicate that an instance variable should not be serialized with the class           |   
+|  Modifier   |                                              Description                                              |
+|:-----------:|:-----------------------------------------------------------------------------------------------------:|
+|   `final`   | Specifies that the instance variable must be initialized with each instance of the class exactly once |   
+| `volatile`  |          Instructs the JVM that the value in this variable may be modified by other threads           |   
+| `transient` |          Used to indicate that an instance variable should not be serialized with the class           |   
 
 ## Reviewing Access Modifiers
 
@@ -114,7 +113,7 @@ public class Trip {
   and uses that instead of the object. **even if the objects points to `null` the static data can still be called**.
 * Remember to look at the reference type not the value for a variable when you see a static method or variable
 * the static blocks, initializers are the only ways to initialize the `static final` variables
-* `static imports` are only for importing `static members` like a `method` or `variable` and not a **class**
+* `static imports` are only for importing `members` like a `method` or `variable` and not a **class**
 * If a variable is `static final`, it must be set exactly once, and it must be in the declaration line or in a 
   `static` initialization block, and you can't set it in `main()`
 ## Autoboxing and Unboxing Variables
