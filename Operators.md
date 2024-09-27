@@ -10,25 +10,25 @@
 ```
 * the `x % y` results in a value between `0` and `(y - 1)`
 
-|            Operator             |                Symbols and examples                 |   Evaluation    |
-|:-------------------------------:|:---------------------------------------------------:|:---------------:|
-|      Post-unary operators       |            `expression++, expression--`             | `Left-to-right` |
-|       Pre-unary operators       |            `++expression, --expression`             | `Left-to-right` |
-|      Other unary operators      |                `-, !, ~, +, (type)`                 | `Right-to-left` |
-|              Cast               |                  `(Type)reference`                  | `Right-to-left` |
-| Multiplication/division/modulus |                      `*, /, %`                      | `Left-to-right` |
-|      Addition/subtraction       |                       `+, -`                        | `Left-to-right` |
-|         Shift operators         |                    `<<, >>, >>>`                    | `Left-to-right` |
-|      Relational operators       |             `<, >, <=, >=, instanceof`              | `Left-to-right` |
-|      Equal to/not equal to      |                      `==, !=`                       | `Left-to-right` |
-|           Logical AND           |                         `&`                         | `Left-to-right` |
-|      Logical exclusive OR       |                         `^`                         | `Left-to-right` |
-|      Logical inclusive OR       |                        `\|`                         | `Left-to-right` |
-|         Conditional AND         |                        `&&`                         | `Left-to-right` |
-|         Conditional OR          |                       `\|\|`                        | `Left-to-right` |
-|        Ternary operators        |   `boolean expression ? expression1 :expression2`   | `Right-to-left` |
-|      Assignment operators       | `=, +=, -=, *=, /=, %=, &=, ^=, \|=, <<=, >>=,>>>=` | `Right-to-left` |
-|         Arrow operator          |                        `->`                         | `Right-to-left` |
+| Precedence |                          Operator                          |                            Symbols and examples                            |  Evaluation   |
+|:----------:|:----------------------------------------------------------:|:--------------------------------------------------------------------------:|:-------------:|
+|     1      | Array element access, member access, and method invocation |                              `[]`, `.`, `()`                               | Left-to-right |
+|     2      |                  Unary postfix operators                   |                       `expression++`, `expression--`                       | Left-to-right |
+|     3      |                   Unary prefix operators                   |   `++expression`, `--expression`, `+expression`, `-expression`, `~`, `!`   | Right-to-left |
+|     4      |                  Cast and object creation                  |                              `(type)`, `new`                               | Right-to-left |
+|     5      |                       Multiplicative                       |                               `*`, `/`, `%`                                | Left-to-right |
+|     6      |                          Additive                          |                                  `+`, `-`                                  | Left-to-right |
+|     7      |                      Shift operators                       |                             `<<`, `>>`, `>>>`                              | Left-to-right |
+|     8      |                    Relational operators                    |                     `<`, `>`, `<=`, `>=`, `instanceof`                     | Left-to-right |
+|     9      |                          Equality                          |                                 `==`, `!=`                                 | Left-to-right |
+|     10     |                        Bitwise AND                         |                                    `&`                                     | Left-to-right |
+|     11     |                        Bitwise XOR                         |                                    `^`                                     | Left-to-right |
+|     12     |                         Bitwise OR                         |                                    `\|`                                    | Left-to-right |
+|     13     |                        Logical AND                         |                                    `&&`                                    | Left-to-right |
+|     14     |                         Logical OR                         |                                   `\|\|`                                   | Left-to-right |
+|     15     |                      Ternary operator                      |              `boolean_expression ? expression1 : expression2`              | Right-to-left |
+|     16     |                    Assignment operators                    | `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `^=`, `\|=`, `<<=`, `>>=`, `>>>=` | Right-to-left |
+|     17     |                     Lambda expression                      |                                    `->`                                    | Right-to-left |
 
 * Numeric Promotion Rules 
   * If two values have different data types, values will be promoted to the larger type
