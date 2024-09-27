@@ -54,9 +54,12 @@
 * Widening Primitive Conversions
     * byte -> short, char -> int -> long -> float -> double
 * conversions between char and the two integer types byte and short are considered narrowing primitive conversions.
-* conversion from a subtype to a supertype called **_upcasting_** and the other way around is called **_downcasting_**
-* **_downcasting_** require a runtime check and can throw a `ClassCastException`
+* For the reference data types conversion from a subtype to a supertype called **_upcasting_** and the other way
+  around is called **_downcasting_**
+* **_downcasting_** require a runtime check and can throw a `ClassCastException` at runtime if the object is not of the
+  subclass type.
 * Unboxing a wrapper reference that has the `null` value results in a `NullPointerException`
+
 ```java
 Integer iRef = 10; // (1) Implicit boxing: Integer <----- int
 Double dRef = Double.valueOf(3.14); // (2) Explicit boxing: Double <----- double
@@ -64,12 +67,152 @@ int i = iRef; // (3) Implicit unboxing: int <----- Integer
 double d = dRef.doubleValue(); // (4) Explicit unboxing: double <----- Double
 ```
 
-## Precedence and Associativity Rules For Operators
+### Assignment Conversion
 
-## Evaluation Order Of Operands
+* An assignment conversion converts the type of expression to the type of target variable.
+* `byte b = 10; // Narrowing conversion: byte <--- int`
+
+### Method Invocation Context
+
+* Method invocation conversions do not include the implicit narrowing conversion performed for non-long integral
+  constant expressions.
+
+```java
+// Assignment: (1) Implicit narrowing followed by (2) boxing.
+Character space1 = 32; // Character <-(2)-- char <-(1)-- int
+// Invocation of method with signature: valueOf(char)
+Character space2 = Character.valueOf(32); // Compile-time error!, Call signature: valueOf(int)
+Character space3 = Character.valueOf((char) 32); // OK!, Call signature: valueOf(char)
+```
+
+### Casting Context of the Unary Type Cast Operator (type)
+
+* Java, being a strongly typed language, checks for type compatibility (i.e., it checks whether a type can substitute
+  for another type in a given context) at **_compile time_**.
+* some checks are possible only at runtime (e.g., which type of object a **_reference_** actually denotes during
+  execution)
+* At runtime, a cast results in a new value of type, which best represents the value of the expression in the old type.
+
+```java
+public static void main() {
+    long l = (long) 10;// Widening primitive conversion: long <--- int
+    int i = (int) l;// (1) Narrowing primitive conversion: int <--- long
+    Object obj = (Object) "7Up"; // Widening ref conversion: Object <--- String
+    String str = (String) obj;// (2) Narrowing ref conversion: String <--- Object
+    Integer iRef = (Integer) i;// Boxing: Integer <--- int
+    i = (int) iRef;// Unboxing: int <--- Integer
+}
+```
+* Casting can be applied to primitive values as well as references.
+* Casting between primitive data types and reference types is not permitted, except where boxing and unboxing is applicable.
+* Boolean values cannot be cast to other data values, and vice versa.
+* The reference literal null can be cast to any reference type.
+### Numeric Promotion Context
+#### Unary Numeric Promotion
+* Unary numeric promotion proceeds as follows:
+  * If f the single operand is of type `Byte`, `Short`, `Character`, or `Integer`, it is unboxed. If the resulting value is narrower than `int` , it is promoted to a value of type `int` by a widening conversion.
+  * Otherwise, if the single operand is of type `Long`, `Float`, or `Double`, it is unboxed.
+  * Otherwise, if the single operand is of a type narrower than `int`, its value is promoted to a value of type `int` by a widening conversion.
+  * Otherwise, the operand remains unchanged.
+* **_unary numeric promotion results in an operand value that is either `int` or wider_**
+* Unary numeric promotion is applied in the following expressions:
+  * Operand of the unary arithmetic operators `+` and `-`
+  * Array creation expression; for example, new int[20], where the dimension expression (in this case, 20) must evaluate to an int value
+  * Indexing array elements; for example, objArray['a'], where the index expression (in this case, 'a') must 
+    evaluate to an int value
+#### Binary Numeric Promotion
+* Binary numeric promotion implicitly applies appropriate widening primitive conversions so that the widest numeric type of a pair of operands is always at least `int`.
+* If `T` is wider than `int`, both operands are converted to `T`; otherwise, both operands are converted to `int`.
+* This means that the resulting type of the operands is at least `int`.
+* Binary numeric promotion is applied in the following expressions:
+  * Operands of the arithmetic operators `*`, `/`, `%`, `+`, and `-`
+  * Operands of the relational operators `<`, `<=`, `>`, and `>=`
+  * Operands of the numerical equality operators `==` and `!=`
+  * Operands of the conditional operator `? :`, under certain circumstances
+## Precedence and Associativity Rules For Operators
+*  Parentheses, (), can be used to override precedence and associativity.
+* All operators not identified previously as unary or ternary are binary—that is, they require two operands.
+* 
+
+| Precedence |                          Operator                          |                            Symbols and examples                            |  Evaluation   |
+|:----------:|:----------------------------------------------------------:|:--------------------------------------------------------------------------:|:-------------:|
+|     1      | Array element access, member access, and method invocation |                              `[]`, `.`, `()`                               | Left-to-right |
+|     2      |                  Unary postfix operators                   |                       `expression++`, `expression--`                       | Left-to-right |
+|     3      |                   Unary prefix operators                   |   `++expression`, `--expression`, `+expression`, `-expression`, `~`, `!`   | Right-to-left |
+|     4      |                  Cast and object creation                  |                              `(type)`, `new`                               | Right-to-left |
+|     5      |                       Multiplicative                       |                               `*`, `/`, `%`                                | Left-to-right |
+|     6      |                          Additive                          |                                  `+`, `-`                                  | Left-to-right |
+|     7      |                      Shift operators                       |                             `<<`, `>>`, `>>>`                              | Left-to-right |
+|     8      |                    Relational operators                    |                     `<`, `>`, `<=`, `>=`, `instanceof`                     | Left-to-right |
+|     9      |                          Equality                          |                                 `==`, `!=`                                 | Left-to-right |
+|     10     |                        Bitwise AND                         |                                    `&`                                     | Left-to-right |
+|     11     |                        Bitwise XOR                         |                                    `^`                                     | Left-to-right |
+|     12     |                         Bitwise OR                         |                                    `\|`                                    | Left-to-right |
+|     13     |                        Logical AND                         |                                    `&&`                                    | Left-to-right |
+|     14     |                         Logical OR                         |                                   `\|\|`                                   | Left-to-right |
+|     15     |                      Ternary operator                      |              `boolean_expression ? expression1 : expression2`              | Right-to-left |
+|     16     |                    Assignment operators                    | `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `^=`, `\|=`, `<<=`, `>>=`, `>>>=` | Right-to-left |
+|     17     |                     Lambda expression                      |                                    `->`                                    | Right-to-left |
 
 ## The Simple Assignment Operator
-
+* Copying reference values by assignment creates **_aliases_**.
+* Reference assignment also does not copy the state of the source object to any object denoted by the reference variable on the left-hand side.
+```java
+Pizza pizzaOne, pizzaTwo;
+pizzaOne = pizzaTwo = new Pizza("Supreme"); // Aliases
+int[] a = {10, 20, 30, 40, 50}; // An array of int
+int index = 4;
+a[index] = index = 2;
+// The evaluation proceeds as follows
+a[index] = index = 2;
+a[4] = index = 2;
+a[4] = (index = 2); // index gets the value 2. = is right associative.
+a[4] = 2; // The value of a[4] is changed from 50 to 2.
+int v1 = v2 = 2016; // Only v1 is declared. Compile-time error!
+```
+### Valid narrowing primitive conversions without cast:
+```java
+// Conditions fulfilled for implicit narrowing primitive conversions.
+short s1 = 10; // int value in range.
+short s2 = 'a'; // char value in range.
+char c1 = 32; // int value in range.
+char c2 = (byte)35; // byte value in range. (int value in range, without cast.)
+byte b1 = 40; // int value in range.
+byte b2 = (short)40; // short value in range. (int value in range, without cast.)
+final int i1 = 20; // Constant variable
+byte b3 = i1; // final value of i1 in range.
+```
+### All other narrowing primitive conversions will produce a compile-time error on assignment and will explicitly require a cast:
+```java
+// Conditions not fulfilled for implicit narrowing primitive conversions.
+// A cast is required.
+int i2 = -20; // i2 is not a constant variable. i2 is not final.
+final int i3 = i2; // i3 is not a constant variable, since i2 is not.
+final int i4 = 200; // i4 is a constant variable.
+final int i5; // i5 is not a constant variable.
+short s3 = (short) i2; // Not constant expression.
+char c3 = (char) i3; // Final value of i3 not determinable at compile time.
+char c4 = (char) i2; // Not constant expression.
+byte b4 = (byte) 128; // int value not in range.
+byte b5 = (byte) i4; // Value of constant variable i4 is not in range.
+i5 = 100; // Initialized at runtime.
+short s4 = (short) i5; // Final value of i5 not determinable at compile time.
+```
+### boxing and unboxing in an assignment context:
+```java
+Boolean boolRef = true; // Boxing.
+Byte bRef = 2; // Constant in range: narrowing, then boxing.
+// Byte bRef2 = 257; // Constant not in range. Compile-time error!
+short s = 10; // Narrowing from int to short.
+// Integer iRef1 = s; // short not assignable to Integer.
+Integer iRef3 = (int) s; // Explicit widening with cast to int and boxing
+boolean bv1 = boolRef; // Unboxing.
+byte b1 = bRef; // Unboxing.
+int iVal = bRef; // Unboxing and widening.
+Integer iRefVal = null; // Always allowed.
+// int j = iRefVal; // NullPointerException at runtime.
+if (iRef3 != null) iVal = iRef3; // Avoids exception at runtime.
+```
 ## Arithmetic Operators
 
 ## The Binary String Concatenation Operator +

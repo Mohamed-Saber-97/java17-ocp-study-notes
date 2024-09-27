@@ -2,17 +2,13 @@
 
 ## The Java Ecosystem
 
-* Java programs are compiled to bytecode that is interpreted by the JVM.
-* The specification of the bytecode is architecture neutral, meaning it is independent of any hardware architecture.
-* Java does not have a preprocessor, and it does not allow pointer handling, user-defined operator overloading, or
-  multiple class inheritance.
-* The JVM can dynamically load class libraries from the local file system as well as from machines on the network, when
-  those libraries are needed at runtime.
-* The language does not allow direct access to memory. A bytecode verifier determines whether any untrusted code loaded
-  in the JVM is safe.
-* The sandbox model is used to confine and execute any untrusted code, limiting the damage that such code can cause.
-* The JIT monitors the program at runtime to identify performance-critical bytecode (called hotspots) that can be
-  optimized. Such code is usually translated to machine code to boost performance.
+* Java programs are compiled into bytecode, which is interpreted by the JVM (Java Virtual Machine).
+* The bytecode specification is architecture-neutral, meaning it is independent of any hardware architecture.
+* Java does not have a preprocessor, and it does not allow pointer handling, user-defined operator overloading, or multiple inheritance of classes.
+* The JVM can dynamically load class libraries from the local file system as well as from networked machines when those libraries are needed at runtime.
+* Java does not allow direct memory access. A bytecode verifier checks whether untrusted code loaded into the JVM is safe.
+* The sandbox model is used to contain and execute untrusted code, limiting the potential damage it can cause.
+* The JIT (Just-In-Time) compiler monitors the program at runtime to identify performance-critical bytecode (called hotspots), which can then be optimized. Typically, such code is translated into machine code to improve performance.
 
 ## Classes
 
