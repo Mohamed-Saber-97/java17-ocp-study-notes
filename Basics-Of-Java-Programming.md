@@ -1,44 +1,47 @@
-# Basics Of Java Programming
+# Basics of Java Programming
 
 ## The Java Ecosystem
 
 * Java programs are compiled into bytecode, which is interpreted by the JVM (Java Virtual Machine).
 * The bytecode specification is architecture-neutral, meaning it is independent of any hardware architecture.
-* Java does not have a preprocessor, and it does not allow pointer handling, user-defined operator overloading, or multiple inheritance of classes.
-* The JVM can dynamically load class libraries from the local file system as well as from networked machines when those libraries are needed at runtime.
-* Java does not allow direct memory access. A bytecode verifier checks whether untrusted code loaded into the JVM is safe.
+* Java does not have a preprocessor and does not allow pointer handling, user-defined operator overloading, or multiple
+  inheritance of classes.
+* The JVM can dynamically load class libraries from the local file system and networked machines when those libraries
+  are needed at runtime.
+* Java does not allow direct memory access. A bytecode verifier checks whether untrusted code loaded into the JVM is
+  safe.
 * The sandbox model is used to contain and execute untrusted code, limiting the potential damage it can cause.
-* The JIT (Just-In-Time) compiler monitors the program at runtime to identify performance-critical bytecode (called hotspots), which can then be optimized. Typically, such code is translated into machine code to improve performance.
+* The JIT (Just-In-Time) compiler monitors the program at runtime to identify performance-critical bytecode (called
+  hotspots), which can then be optimized. Typically, such code is translated into machine code to improve performance.
 
 ## Classes
 
-* A class models an abstraction by defining the properties and behaviors of the objects representing the abstraction.
-* The contract (interface) defines _**which**_ services are provided, and the implementation (class) defines _**how**_
-  these services are provided by the class.
-* Clients (i.e., other objects) need only know the contract of an object, and not its implementation, to avail
-  themselves of the object’s services.
-* constructor is executed when an object is created from the class.
+* A class models an abstraction by defining the properties and behaviors of the objects representing that abstraction.
+* The contract (interface) defines _**which**_ services are provided, while the implementation (class) defines _**how**_
+  these services are provided.
+* Clients (i.e., other objects) need only know the contract of an object, not its implementation, to use the object’s
+  services.
+* A constructor is executed when an object is created from the class.
 
 ## Objects
 
-* A _**reference value**_ is returned when an object is created. A _**reference value**_ uniquely denotes a particular
-  object.
+* A _**reference value**_ is returned when an object is created; it uniquely denotes a particular object.
 * A _**variable**_ denotes a location in memory where a value can be stored.
 * An _**object reference**_ (or simply _**reference**_) is a variable that can store a _**reference value**_.
-* Object can only be manipulated by a reference that holds its reference value. Direct access to the reference value is
-  not permitted.
-* `The toString() method called on a String object returns the String object itself.Point2D p1 = new Point2D(10, 20); // A point with coordinates (10,20)`
-    * The `new` operator creates an instance of the Point2D class and returns the _**reference value**_ of this
+* An object can only be manipulated by a reference that holds its reference value; direct access to the reference value
+  is not permitted.
+* Example: `Point2D p1 = new Point2D(10, 20);` creates a point with coordinates (10, 20).
+    * The `new` operator creates an instance of the `Point2D` class and returns the _**reference value**_ of this
       instance.
     * The purpose of the constructor call on the right-hand side of the new operator is to initialize the fields of the
       newly created object.
-* objects in Java do not have names, but rather are denoted by references.
+* Objects in Java do not have names; they are denoted by references.
 
 ## Static Members
 
-* A static variable belongs to the class, It will be allocated in the class and initialized in its declaration when the
-  class is loaded.
-* Static members can also be accessed via object references, although doing so is not encouraged.
+* A static variable belongs to the class; it is allocated in the class and initialized in its declaration when the class
+  is loaded.
+* Static members can be accessed via object references, although doing so is not encouraged.
 * Static members in a class can be accessed both by the class name and via object references, but instance members can
   be accessed only by object references.
 
@@ -50,14 +53,14 @@
 | **_Instance variable_** | A field that is allocated when the class is instantiated (i.e., when an object of the class is created). Also called a non-static field or just a field when the context is obvious. |
 |  **_Instance method_**  |                                        A method that belongs to an instance of the class. Objects of the same class share its implementation.                                        |
 |  **_Static members_**   |                  The static variables and static methods of a class. They can be accessed or invoked either by using the class name or through an object reference.                  |
-|  **_Static variable_**  |      A field that is allocated when the class is loaded. It belongs to the class, and not to any specific object of the class. Also called a static field or a class variable.       |
+|  **_Static variable_**  |       A field that is allocated when the class is loaded. It belongs to the class and not to any specific object of the class. Also called a static field or a class variable.       |
 |   **_Static method_**   |                                         A method that belongs to the class, and not to any object of the class. Also called a class method.                                          |
 
 ## Inheritance
 
 * A subclass can **_extend_** only one superclass.
-* `private` fields in the super class are accessible to subclass object indirectly through the `public` get and set
-  methods.
+* `private` fields in the superclass are accessible to subclass objects indirectly through the `public` getter and
+  setter methods.
 
 ## Aggregation
 
@@ -71,41 +74,42 @@
   runtime to start the execution of the program. The class with this `main()` method is known as the *
   *_entry point of the program_**.
 * The classes in the Java SE Platform API are already compiled, and the JDK tools know where to find them.
-* Java source files can be compiled using the Java Language Compiler, javac, which is part of the JDK.
-* Each source file name has the extension .java. Each class declaration in a source file is compiled into a separate
+* Java source files can be compiled using the Java Language Compiler (`javac`), which is part of the JDK.
+* Each source file name has the extension `.java`. Each class declaration in a source file is compiled into a separate
   class file, containing its Java bytecode.
-* `javac ClassName.java` to compile the source code and generate a bytecode file (.class)
-* We can run the program with the `java ClassName.java` without compiling it first (compile on the fly) if all the
-  source code are in one file.
-* no class files are created. The source code is compiled fully in memory and executed.
-* In order to run a single-file source-code program, the following conditions must be met:
+* To compile the source code and generate a bytecode file (.class), use: `javac ClassName.java`.
+* You can run the program with `java ClassName` without compiling it first (compile on the fly) if all the source code
+  is in one file.
+* In this case, no class files are created; the source code is compiled fully in memory and executed.
+* To run a single-file source-code program, the following conditions must be met:
     * The single source file must contain _**all**_ source code for the program.
-    * the first class declaration in the source file must provide the main() method; that is, it must be the entry point
-      of the program.
+    * The first class declaration in the source file must provide the `main()` method; that is, it must be the entry
+      point of the program.
     * There must not exist class files corresponding to the class declarations in the single source file that are
-      accessible by the java command.
-    * An invalid class name can be used (name of the file can be different from the public class).
-    * allows several public classes in the single source file.
+      accessible by the `java` command.
+    * An invalid class name can be used (the name of the file can be different from the public class).
+    * Several public classes can exist in a single source file.
 
 ## Program Output
 
-* A Java program can send its output to the terminal window using an object called standard out which can be accessed
-  using the `public static final` field out in the `System` class, is an object of the class `java.io.PrintStream`.
-* An object is first converted to its text representation by calling its `toString()` method implicitly, if it is not
+* A Java program can send its output to the terminal window using an object called standard output, which can be
+  accessed using the `public static final` field `out` in the `System` class; it is an object of the
+  class `java.io.PrintStream`.
+* An object is first converted to its text representation by calling its `toString()` method implicitly if it is not
   already called explicitly on the object.
 * The `toString()` method called on a String object returns the String object itself.
 * Any error in the format string will result in a runtime exception.
 
 ### Format Specifier Examples
 
-|     Parameter value      | Format spec | Example value | String printed |                                                                  Description                                                                  |
+|     Parameter Value      | Format Spec | Example Value | String Printed |                                                                  Description                                                                  |
 |:------------------------:|:-----------:|:-------------:|:--------------:|:---------------------------------------------------------------------------------------------------------------------------------------------:|
-|    **Integer value**     |    `%d`     |     `123`     |     "123"      |                                                Occupies as many character positions as needed.                                                |
-|    **Integer value**     |    `%6d`    |     `123`     |    "   123"    |           Occupies six character positions and is right-justified. The printed string is padded with leading spaces, if necessary.            |
-|    **Integer value**     |   `%06d`    |     `123`     |    "000123"    |            Occupies six character positions and is right-justified. The printed string is padded with leading zeros, if necessary.            |
-| **Floating-point value** |    `%f`     |    `4.567`    |   "4.567000"   |                            Occupies as many character positions as needed, but always includes six decimal places.                            |
-| **Floating-point value** |   `%.2f`    |    `4.567`    |     "4.57"     |    Occupies as many character positions as needed, but includes only two decimal places. The value is rounded in the output, if necessary.    |
-| **Floating-point value** |   `%6.2f`   |    `4.567`    |   "   4.57"    | Occupies six character positions, including the decimal point, and uses two decimal places. The value is rounded in the output, if necessary. |
-|      **Any object**      |    `%s`     |     `Hi!`     |     "Hi!"      |                             The text representation of the object occupies as many character positions as needed.                             |
-|      **Any object**      |    `%6s`    |     `Hi!`     |    "   Hi!"    |                        The text representation of the object occupies six character positions and is right-justified.                         |
-|      **Any object**      |   `%-6s`    |     `Hi!`     |    "Hi!   "    |                         The text representation of the object occupies six character positions and is left-justified.                         |
+|    **Integer Value**     |    `%d`     |     `123`     |     "123"      |                                                Occupies as many character positions as needed.                                                |
+|    **Integer Value**     |    `%6d`    |     `123`     |    "   123"    |           Occupies six character positions and is right-justified. The printed string is padded with leading spaces, if necessary.            |
+|    **Integer Value**     |   `%06d`    |     `123`     |    "000123"    |            Occupies six character positions and is right-justified. The printed string is padded with leading zeros, if necessary.            |
+| **Floating-Point Value** |    `%f`     |    `4.567`    |   "4.567000"   |                            Occupies as many character positions as needed, but always includes six decimal places.                            |
+| **Floating-Point Value** |   `%.2f`    |    `4.567`    |     "4.57"     |    Occupies as many character positions as needed, but includes only two decimal places. The value is rounded in the output, if necessary.    |
+| **Floating-Point Value** |   `%6.2f`   |    `4.567`    |   "   4.57"    | Occupies six character positions, including the decimal point, and uses two decimal places. The value is rounded in the output, if necessary. |
+|      **Any Object**      |    `%s`     |     `Hi!`     |     "Hi!"      |                             The text representation of the object occupies as many character positions as needed.                             |
+|      **Any Object**      |    `%6s`    |     `Hi!`     |    "   Hi!"    |                        The text representation of the object occupies six character positions and is right-justified.                         |
+|      **Any Object**      |   `%-6s`    |     `Hi!`     |    "Hi!   "    |                         The text representation of the object occupies six character positions and is left-justified.                         |

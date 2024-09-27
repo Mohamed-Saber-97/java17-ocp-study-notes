@@ -214,25 +214,60 @@ Integer iRefVal = null; // Always allowed.
 if (iRef3 != null) iVal = iRef3; // Avoids exception at runtime.
 ```
 ## Arithmetic Operators
-
-## The Binary String Concatenation Operator +
-
+* Integer arithmetic always returns a value that is in range, except in the case of integer division by zero and remainder by zero, which cause an `ArithmeticException`.
+* Adding or multiplying two very large floating-point numbers or division by zero can result in **_infinity_**.
+* Floating-point arithmetic can also result in **_underflow_** to zero.
+* Calculating the square root of –1 or `0.0/0.0` results in a NaN.
+* Any operation involving NaN produces NaN. Any comparison (except inequality, !=) involving NaN and any other value 
+  (including NaN) returns false.An inequality comparison of NaN with another value (including NaN) always returns true
+* decrementing a literal would result in compile-time error.
 ## Variable Increment and Decrement Operator ++,--
-
-## Boolean Expression
-
+* `++i` adds 1 to the value in `i`, and stores the new value in `i`. It returns the new value as the value of the expression
+* `j++` adds 1 to the value in `j`, and stores the new value in `j`. It returns the original value that was in `j` as the value of the expression.
 ## Relational Operators <, <=, >, >=
-
+```java
+int a = 1, b = 7, c = 10;
+boolean illegal = a <= b <= c; // (1) Illegal. Compile-time error!
+boolean valid2 = a <= b && b <= c; // (2) OK.
+```
 ## Equality
-
-## Boolean logical Operators !, ^, &, |
-
-## Conditional Operators: &&, ||
-
-## Integer Bitwise Operators: ~, &, |, ^
-
-## Shift Operators: <<, >>, >>>
-
-## The Conditional Operator ?:
-
-## Other Operators: new, [], instanceof, ->
+```java
+Pizza pizzaA = new Pizza("Sweet&Sour"); // new object
+Pizza pizzaB = new Pizza("Sweet&Sour"); // new object
+Pizza pizzaC = new Pizza("Hot&Spicy"); // new object
+String banner = "Come and get it!"; // new object
+boolean test = banner == pizzaA; // (1) Compile-time error
+boolean test1 = pizzaA == pizzaB; // false
+boolean test2 = pizzaA == pizzaC; // false
+pizzaA = pizzaB; // Denote the same object; are aliases
+boolean test3 = pizzaA == pizzaB; // true
+```
+```java
+// Equality for String objects means identical character sequences.
+String movie1 = new String("The Revenge of the Exception Handler");
+String movie2 = new String("High Noon at the Java Corral");
+String movie3 = new String("The Revenge of the Exception Handler");
+boolean test0 = movie1.equals(movie2); // false.
+boolean test1 = movie1.equals(movie3); // true.
+// Equality for wrapper classes means same type and same primitive value.
+Boolean flag1 = true; // Boxing.
+Boolean flag2 = false; // Boxing.
+boolean test2 = flag1.equals("true"); // false. Not same type.
+boolean test3 = flag1.equals(!flag2); // true. Same type and value.
+Integer iRef = 100; // Boxing.
+Short sRef = 100; // Boxing <--- short <--- int
+boolean test4 = iRef.equals(100); // true. Same type and value.
+boolean test5 = iRef.equals(sRef); // false. Not same type.
+boolean test6 = iRef.equals(3.14); // false. Not same type.
+// The Pizza class does not override the equals() method, so we can use either
+// equals() method inherited from the Object class or equality operator ==.
+Pizza pizza1 = new Pizza("Veggies Delight");
+Pizza pizza2 = new Pizza("Veggies Delight");
+Pizza pizza3 = new Pizza("Cheese Delight");
+boolean test7 = pizza1.equals(pizza2); // false.
+boolean test8 = pizza1.equals(pizza3); // false.
+boolean test9 = pizza1 == pizza2; // false.
+pizza1 = pizza2; // Creates aliases.
+boolean test10 = pizza1.equals(pizza2); // true.
+boolean test11 = pizza1 == pizza2; // true.
+```
