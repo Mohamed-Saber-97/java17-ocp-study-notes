@@ -11,7 +11,7 @@
 ### Class Modifiers
 
 | Class Modifier |                                             Description                                             |
-|:--------------:|:---------------------------------------------------------------------------------------------------:|
+| :------------: | :-------------------------------------------------------------------------------------------------: |
 |    `final`     |                                    The class may not be extended                                    |
 |   `abstract`   | The class is abstract, may contain abstract methods,and requires a concrete subclass to instantiate |
 |    `sealed`    |                    The class may only be extended by a specific list of classes                     |
