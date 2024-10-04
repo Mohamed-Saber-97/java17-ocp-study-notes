@@ -340,7 +340,7 @@ Lemur lemur3 = primate; // DOES NOT COMPILE (missing cast)
 
 * While the compiler can enforce rules about casting to unrelated types for classes, it cannot always do the same for interfaces
 * The `instanceof` operator can be used to check whether an object belongs to a particular class or interface and to prevent a `ClassCastException` at runtime.
-* 
+
 ```java
 interface Canine {}
 interface Dog {}
