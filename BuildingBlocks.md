@@ -15,7 +15,7 @@
     * Comments can be placed anywhere, and blank lines are ignored.
 
 |          Element           |        Example        | Required? |                     Where does it go?                      |
-|:--------------------------:|:---------------------:|:---------:|:----------------------------------------------------------:|
+| :------------------------: | :-------------------: | :-------: | :--------------------------------------------------------: |
 |    Package declaration     |    `package abc;`     |    No     | First line in the file (excluding comments or blank lines) |
 |     Import statements      | `import java.util.*;` |    No     |         Immediately after the package (if present)         |
 | Top-level type declaration |   `public class C`    |    Yes    |           Immediately after the imports (if any)           |
@@ -61,7 +61,7 @@
 ## Compiling and Running Code with Packages
 
 |        Step         |            Windows             |          Mac/Linux          |
-|:-------------------:|:------------------------------:|:---------------------------:|
+| :-----------------: | :----------------------------: | :-------------------------: |
 | Create first class  | `C:\temp\packagea\ClassA.java` | `/tmp/packagea/ClassA.java` |
 | Create second class | `C:\temp\packageb\ClassB.java` | `/tmp/packageb/ClassB.java` |
 |   Go to directory   |          `cd C:\temp`          |          `cd /tmp`          |
@@ -135,20 +135,20 @@ public class Bird {//class definition
 ## Understanding Data Types
 
 * Identifiers must:
-    * Begin with a letter, a currency symbol, or an underscore (_).
-    * Not start with numbers.
-    * Not be only a single underscore (_).
-    * Not have the same name as a Java reserved word.
+  * Begin with a letter, a currency symbol, or an underscore (_).
+  * Not start with numbers.
+  * Not be only a single underscore (_).
+  * Not have the same name as a Java reserved word.
 * Declaring multiple variables in the same statement is legal only when they share a type.
 * A **local variable** is defined within a constructor, method, or initializer block.
 * **Local variables** do not have a default value and must be initialized before use; otherwise, the file won't compile.
 * `var` can only be used with local variables:
-    * For example, `var n = null;` is not allowed, and a value must be initialized.
+  * For example, `var n = null;` is not allowed, and a value must be initialized.
 * Instance variables or class variables do not require explicit initialization:
-    * `object = null`
-    * `numeric = 0, 0.0`
-    * `boolean = false`
-    * `char = '\u0000'`
+  * `object = null`
+  * `numeric = 0, 0.0`
+  * `boolean = false`
+  * `char = '\u0000'`
 * **`final` variables don't have default values.**
 
 ### Primitive Types
@@ -159,11 +159,11 @@ public class Bird {//class definition
 * **Short** (signed) and **char** (unsigned) values can be cast to one another because the underlying data size is the
   same.
 * Example: `double annoyingButLegal = 1____00_0.0____0;` adds underscores anywhere except:
-    * **Beginning / end** of a literal.
-    * Right **before / after** a decimal point.
+  * **Beginning / end** of a literal.
+  * Right **before / after** a decimal point.
 
 |  Keyword  |            Type             |    Min Value     |    Max Value     | Default Value |  Example   |
-|:---------:|:---------------------------:|:----------------:|:----------------:|:-------------:|:----------:|
+| :-------: | :-------------------------: | :--------------: | :--------------: | :-----------: | :--------: |
 | `boolean` |        true or false        |      `n/a`       |      `n/a`       |    `false`    |   `true`   |
 |  `byte`   |    8-bit integral value     |      `-128`      |      `127`       |      `0`      |   `123`    |
 |  `short`  |    16-bit integral value    |    `-32,768`     |     `32,767`     |      `0`      |   `123`    |
@@ -177,8 +177,8 @@ public class Bird {//class definition
 
 * A reference ***points*** to an object by storing the memory address where the object is located. A reference can be
   assigned to:
-    * Another object of the same or compatible type.
-    * A new object using the `new` keyword.
+  * Another object of the same or compatible type.
+  * A new object using the `new` keyword.
 * A reference is a variable that has a name and can be used to access the contents of an object.
 * A reference can be assigned to another reference, passed to a method, or returned from a method.
 * All references are the same size, regardless of their type.
@@ -193,7 +193,7 @@ public class Bird {//class definition
   ```
 
 | Primitive type | Wrapper class | Wrapper class inherits Number? |     Example of creating      |
-|:--------------:|:-------------:|:------------------------------:|:----------------------------:|
+| :------------: | :-----------: | :----------------------------: | :--------------------------: |
 |   `boolean`    |   `Boolean`   |              `No`              |   `Boolean.valueOf(true)`    |
 |     `byte`     |    `Byte`     |             `Yes`              |   `Byte.valueOf((byte) 1)`   |
 |    `short`     |    `Short`    |             `Yes`              |  `Short.valueOf((short) 1)`  |

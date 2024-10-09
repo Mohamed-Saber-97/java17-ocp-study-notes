@@ -8,28 +8,7 @@
   * `Set`: A set is a collection that does not allow duplicate entries.
   * `Queue`: A queue is a collection that orders its elements in a specific order for processing. A `Deque` is a subinterface of `Queue` that allows access at both ends.
   * `Map`: A map is a collection that maps keys to values, with no duplicate keys allowed. The elements in a map are key/value pairs.
-
-```mermaid
-graph BT;
-
-    Map[Map]
-    HashMap([HashMap]) --> Map
-    TreeMap([TreeMap]) --> Map
-
-     Collection[Collection]
-
-    Queue[Queue] --> Collection
-    Deque[Deque] --> Queue
-    LinkedList([LinkedList]) --> Deque
-
-    List[List] --> Collection
-    ArrayList([ArrayList]) --> List
-    LinkedList([LinkedList]) --> List
-
-    Set[Set] --> Collection
- HashSet([HashSet]) --> Set
-    TreeSet([TreeSet]) --> Set
-```
+![Java Collections Framework](./images/JavaCollectionsFramework.png)
 
 * In this section, we discuss the common methods that the Collections API provides to the implementing classes. Many of these methods are convenience methods that could be implemented in other ways but make your code easier to write and read. This is why they are convenient.
   
